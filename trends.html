@@ -86,3 +86,527 @@
 
     <!-- Trends Section -->
     <section class="container mb-5">
+        <!-- Color Trends -->
+        <div class="card trend-card mb-5" id="colors">
+            <div class="card-body p-4">
+                <h2 class="mb-4"><i class="fas fa-palette text-primary me-2"></i> Color Trends</h2>
+                
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="chart-container">
+                            <canvas id="colorChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <h4>Top Colors in Game Ads</h4>
+                        <p class="text-muted">The most frequently used color schemes in mobile game advertisements.</p>
+                        
+                        <div id="colorLegend" class="mt-4"></div>
+                        
+                        <div class="alert alert-info mt-4">
+                            <strong>Insight:</strong> <span id="colorInsight">Loading color insights...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CTA Trends -->
+        <div class="card trend-card mb-5" id="cta">
+            <div class="card-body p-4">
+                <h2 class="mb-4"><i class="fas fa-bullhorn text-primary me-2"></i> Call-to-Action Trends</h2>
+                
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="chart-container">
+                            <canvas id="ctaChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <h4>Effective CTAs</h4>
+                        <p class="text-muted">The most common call-to-action phrases used in game advertisements.</p>
+                        
+                        <ul class="list-group mt-4" id="ctaList">
+                            <!-- Will be populated dynamically -->
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Loading CTAs...
+                                <span class="badge bg-primary rounded-pill">0</span>
+                            </li>
+                        </ul>
+                        
+                        <div class="alert alert-info mt-4">
+                            <strong>Insight:</strong> <span id="ctaInsight">Loading CTA insights...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Audience Trends -->
+        <div class="card trend-card mb-5" id="audience">
+            <div class="card-body p-4">
+                <h2 class="mb-4"><i class="fas fa-users text-primary me-2"></i> Target Audience Trends</h2>
+                
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="chart-container">
+                            <canvas id="audienceChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <h4>Audience Targeting</h4>
+                        <p class="text-muted">The most targeted audience segments in game advertisements.</p>
+                        
+                        <ul class="list-group mt-4" id="audienceList">
+                            <!-- Will be populated dynamically -->
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Loading audience data...
+                                <span class="badge bg-primary rounded-pill">0</span>
+                            </li>
+                        </ul>
+                        
+                        <div class="alert alert-info mt-4">
+                            <strong>Insight:</strong> <span id="audienceInsight">Loading audience insights...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Feature Trends -->
+        <div class="card trend-card mb-5">
+            <div class="card-body p-4">
+                <h2 class="mb-4"><i class="fas fa-star text-primary me-2"></i> Ad Feature Trends</h2>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-award trend-icon text-warning"></i>
+                                <h4>Superlative Language</h4>
+                                <div class="progress mb-3">
+                                    <div class="progress-bar bg-warning" id="superlativeProgress" role="progressbar" style="width: 0%">0%</div>
+                                </div>
+                                <p>Percentage of ads using superlative language like "best," "top," or "amazing."</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-gift trend-icon text-success"></i>
+                                <h4>Free-to-Play Mentions</h4>
+                                <div class="progress mb-3">
+                                    <div class="progress-bar bg-success" id="freeProgress" role="progressbar" style="width: 0%">0%</div>
+                                </div>
+                                <p>Percentage of ads highlighting free-to-play or free download aspects.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-bolt trend-icon text-danger"></i>
+                                <h4>New Content Emphasis</h4>
+                                <div class="progress mb-3">
+                                    <div class="progress-bar bg-danger" id="newProgress" role="progressbar" style="width: 0%">0%</div>
+                                </div>
+                                <p>Percentage of ads promoting new features, updates, or content.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-video trend-icon text-info"></i>
+                                <h4>Source Distribution</h4>
+                                <canvas id="sourceChart" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Game Ad Analyzer</h5>
+                    <p>An AI-powered tool for analyzing mobile game advertisements.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>Updated automatically via GitHub Actions</p>
+                    <p class="mb-0">Data refreshes daily</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Global variables
+        let trendData = null;
+        let allAds = [];
+        
+        // Load data from JSON files
+        async function loadData() {
+            try {
+                // Update info
+                const updateInfoResponse = await fetch('data/update_info.json');
+                if (updateInfoResponse.ok) {
+                    const updateInfo = await updateInfoResponse.json();
+                    document.getElementById('lastUpdate').textContent = updateInfo.last_updated;
+                }
+
+                // Trend analysis
+                const trendResponse = await fetch('data/trend_analysis.json');
+                if (trendResponse.ok) {
+                    trendData = await trendResponse.json();
+                    
+                    // Display trend data
+                    displayColorTrends(trendData.color_trends);
+                    displayCTATrends(trendData.cta_trends);
+                    displayAudienceTrends(trendData.audience_trends);
+                }
+                
+                // All ads (for additional analysis)
+                const allAdsResponse = await fetch('data/all_ads.json');
+                if (allAdsResponse.ok) {
+                    allAds = await allAdsResponse.json();
+                    
+                    // Display additional trends
+                    displayFeatureTrends(allAds);
+                    displaySourceDistribution(allAds);
+                }
+            } catch (error) {
+                console.error('Error loading data:', error);
+            }
+        }
+        
+        // Display color trends
+        function displayColorTrends(colorTrends) {
+            if (!colorTrends || colorTrends.length === 0) {
+                document.getElementById('colorInsight').textContent = 'No color data available yet.';
+                return;
+            }
+            
+            const colors = colorTrends.map(c => c.name);
+            const counts = colorTrends.map(c => c.count);
+            
+            // Generate hex colors for chart
+            const hexColors = colors.map(color => {
+                switch(color) {
+                    case 'red': return '#FF6384';
+                    case 'blue': return '#36A2EB';
+                    case 'green': return '#4BC0C0';
+                    case 'yellow': return '#FFCE56';
+                    case 'purple': return '#9966FF';
+                    case 'orange': return '#FF9F40';
+                    case 'pink': return '#FF6384';
+                    case 'cyan': return '#4BC0C0';
+                    case 'magenta': return '#C9509E';
+                    case 'black': return '#1C1C1C';
+                    case 'white': return '#EFEFEF';
+                    case 'gray': return '#9E9E9E';
+                    case 'brown': return '#A5682A';
+                    default: return '#' + Math.floor(Math.random()*16777215).toString(16);
+                }
+            });
+            
+            // Create chart
+            const ctx = document.getElementById('colorChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: colors,
+                    datasets: [{
+                        data: counts,
+                        backgroundColor: hexColors,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+            
+            // Create color legend
+            const legend = document.getElementById('colorLegend');
+            legend.innerHTML = '';
+            
+            colorTrends.forEach((color, index) => {
+                const item = document.createElement('div');
+                item.className = 'd-flex align-items-center mb-2';
+                item.innerHTML = `
+                    <div class="color-sample" style="background-color: ${hexColors[index]}"></div>
+                    <div>
+                        <strong>${color.name}</strong> (${color.count} ads)
+                    </div>
+                `;
+                legend.appendChild(item);
+            });
+            
+            // Generate insight
+            const topColor = colorTrends[0].name;
+            const secondColor = colorTrends.length > 1 ? colorTrends[1].name : null;
+            
+            let insightText = `The dominant color in game ads is <strong>${topColor}</strong>`;
+            if (secondColor) {
+                insightText += `, followed by <strong>${secondColor}</strong>`;
+            }
+            
+            // Add color psychology insight
+            const colorPsychology = {
+                red: 'excitement, urgency, and passion',
+                blue: 'trust, stability, and calmness',
+                green: 'growth, health, and harmony',
+                yellow: 'optimism, happiness, and energy',
+                purple: 'creativity, luxury, and wisdom',
+                orange: 'enthusiasm, fun, and vitality',
+                pink: 'playfulness, romance, and femininity',
+                black: 'sophistication, power, and elegance',
+                white: 'simplicity, purity, and cleanliness',
+                gray: 'neutrality, balance, and sophistication'
+            };
+            
+            if (colorPsychology[topColor]) {
+                insightText += `. ${topColor.charAt(0).toUpperCase() + topColor.slice(1)} is associated with ${colorPsychology[topColor]}.`;
+            }
+            
+            document.getElementById('colorInsight').innerHTML = insightText;
+        }
+        
+        // Display CTA trends
+        function displayCTATrends(ctaTrends) {
+            if (!ctaTrends || ctaTrends.length === 0) {
+                document.getElementById('ctaInsight').textContent = 'No CTA data available yet.';
+                return;
+            }
+            
+            const ctas = ctaTrends.map(c => c.type);
+            const counts = ctaTrends.map(c => c.count);
+            
+            // Create chart
+            const ctx = document.getElementById('ctaChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ctas,
+                    datasets: [{
+                        label: 'Number of Ads',
+                        data: counts,
+                        backgroundColor: 'rgba(102, 16, 242, 0.7)',
+                        borderColor: 'rgba(102, 16, 242, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            
+            // Create CTA list
+            const ctaList = document.getElementById('ctaList');
+            ctaList.innerHTML = '';
+            
+            ctaTrends.forEach(cta => {
+                const item = document.createElement('li');
+                item.className = 'list-group-item d-flex justify-content-between align-items-center';
+                item.innerHTML = `
+                    ${cta.type === 'unknown' ? 'Other/Unknown' : cta.type}
+                    <span class="badge bg-primary rounded-pill">${cta.count}</span>
+                `;
+                ctaList.appendChild(item);
+            });
+            
+            // Generate insight
+            const topCta = ctaTrends[0].type;
+            
+            let insightText = '';
+            if (topCta === 'play') {
+                insightText = 'The most common call-to-action is <strong>play now</strong>, suggesting a focus on immediate engagement rather than just installation.';
+            } else if (topCta === 'download') {
+                insightText = 'Ads primarily focus on <strong>download</strong> calls-to-action, emphasizing the installation step in the user journey.';
+            } else if (topCta === 'get') {
+                insightText = 'The <strong>get</strong> call-to-action is dominant, which creates a sense of ownership for potential players.';
+            } else if (topCta === 'install') {
+                insightText = 'Ads commonly use <strong>install</strong> as their primary call-to-action, directly focusing on the conversion action.';
+            } else {
+                insightText = `The most common call-to-action is <strong>${topCta}</strong>.`;
+            }
+            
+            document.getElementById('ctaInsight').innerHTML = insightText;
+        }
+        
+        // Display audience trends
+        function displayAudienceTrends(audienceTrends) {
+            if (!audienceTrends || audienceTrends.length === 0) {
+                document.getElementById('audienceInsight').textContent = 'No audience data available yet.';
+                return;
+            }
+            
+            const audiences = audienceTrends.map(a => a.audience);
+            const counts = audienceTrends.map(a => a.count);
+            
+            // Generate colors
+            const backgroundColors = [
+                'rgba(102, 16, 242, 0.7)',
+                'rgba(111, 66, 193, 0.7)',
+                'rgba(214, 51, 132, 0.7)',
+                'rgba(250, 82, 82, 0.7)',
+                'rgba(106, 90, 205, 0.7)'
+            ];
+            
+            // Create chart
+            const ctx = document.getElementById('audienceChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'polarArea',
+                data: {
+                    labels: audiences,
+                    datasets: [{
+                        data: counts,
+                        backgroundColor: backgroundColors,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+            
+            // Create audience list
+            const audienceList = document.getElementById('audienceList');
+            audienceList.innerHTML = '';
+            
+            audienceTrends.forEach((audience, index) => {
+                const item = document.createElement('li');
+                item.className = 'list-group-item d-flex justify-content-between align-items-center';
+                item.innerHTML = `
+                    ${audience.audience}
+                    <span class="badge rounded-pill" style="background-color: ${backgroundColors[index % backgroundColors.length]}">${audience.count}</span>
+                `;
+                audienceList.appendChild(item);
+            });
+            
+            // Generate insight
+            const topAudience = audienceTrends[0].audience;
+            
+            let insightText = '';
+            if (topAudience === 'casual gamers') {
+                insightText = 'Ads primarily target <strong>casual gamers</strong>, focusing on accessibility and easy-to-play mechanics.';
+            } else if (topAudience === 'competitive gamers') {
+                insightText = 'Most ads are designed for <strong>competitive gamers</strong>, highlighting challenge and skill-based gameplay.';
+            } else if (topAudience === 'simulation fans') {
+                insightText = 'Ads frequently target <strong>simulation fans</strong> who enjoy creative and management-style gameplay.';
+            } else {
+                insightText = `The most targeted audience is <strong>${topAudience}</strong>.`;
+            }
+            
+            document.getElementById('audienceInsight').innerHTML = insightText;
+        }
+        
+        // Display feature trends
+        function displayFeatureTrends(ads) {
+            if (!ads || ads.length === 0) return;
+            
+            let superlativeCount = 0;
+            let freeCount = 0;
+            let newCount = 0;
+            
+            // Count features
+            ads.forEach(ad => {
+                if (ad.analysis) {
+                    if (ad.analysis.uses_superlatives) superlativeCount++;
+                    if (ad.analysis.mentions_free) freeCount++;
+                    if (ad.analysis.mentions_new) newCount++;
+                }
+            });
+            
+            // Calculate percentages
+            const totalAnalyzedAds = ads.filter(ad => ad.analyzed).length;
+            if (totalAnalyzedAds === 0) return;
+            
+            const superlativePercentage = Math.round((superlativeCount / totalAnalyzedAds) * 100);
+            const freePercentage = Math.round((freeCount / totalAnalyzedAds) * 100);
+            const newPercentage = Math.round((newCount / totalAnalyzedAds) * 100);
+            
+            // Update progress bars
+            document.getElementById('superlativeProgress').style.width = `${superlativePercentage}%`;
+            document.getElementById('superlativeProgress').textContent = `${superlativePercentage}%`;
+            
+            document.getElementById('freeProgress').style.width = `${freePercentage}%`;
+            document.getElementById('freeProgress').textContent = `${freePercentage}%`;
+            
+            document.getElementById('newProgress').style.width = `${newPercentage}%`;
+            document.getElementById('newProgress').textContent = `${newPercentage}%`;
+        }
+        
+        // Display source distribution
+        function displaySourceDistribution(ads) {
+            if (!ads || ads.length === 0) return;
+            
+            // Count by source
+            const sourceCounts = {};
+            ads.forEach(ad => {
+                if (!sourceCounts[ad.source]) {
+                    sourceCounts[ad.source] = 0;
+                }
+                sourceCounts[ad.source]++;
+            });
+            
+            // Prepare data for chart
+            const sources = Object.keys(sourceCounts);
+            const counts = sources.map(source => sourceCounts[source]);
+            
+            // Generate colors
+            const backgroundColors = {
+                youtube: 'rgba(255, 0, 0, 0.7)',
+                facebook: 'rgba(66, 103, 178, 0.7)',
+                tiktok: 'rgba(0, 0, 0, 0.7)'
+            };
+            
+            // Create chart
+            const ctx = document.getElementById('sourceChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: sources.map(s => s.charAt(0).toUpperCase() + s.slice(1)),
+                    datasets: [{
+                        data: counts,
+                        backgroundColor: sources.map(s => backgroundColors[s] || 'rgba(102, 16, 242, 0.7)'),
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        }
+        
+        // Load data when page loads
+        document.addEventListener('DOMContentLoaded', loadData);
+    </script>
+</body>
+</html>
