@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Ad Analyzer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            background-color: #6610f2 !important;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #6610f2 0%, #6f42c1 100%);
+            color: white;
+            padding: 60px 0;
+            margin-bottom: 30px;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            margin-bottom: 20px;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-header {
+            background-color: #6f42c1;
+            color: white;
+            border-radius: 10px 10px 0 0 !important;
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #6610f2;
+        }
+        .update-info {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        .icon-large {
+            font-size: 2.5rem;
+            color: #6610f2;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-chart-line"></i> Game Ad Analyzer
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ad-library.html">Ad Library</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="trends.html">Trends</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="top-games.html">Top Games</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container text-center">
+            <h1 class="display-4">Game Ad Analyzer</h1>
+            <p class="lead">AI-powered analysis of mobile game advertisements</p>
+            <p class="update-info">Last Update: <span id="lastUpdate">Loading...</span></p>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section class="container mb-5">
+        <div class="row">
+            <!-- Stats Cards -->
+            <div class="col-md-3">
+                <div class="card text-center h-100">
+                    <div class="card-header">Total Ads</div>
+                    <div class="card-body">
+                        <i class="fas fa-ad icon-large"></i>
+                        <div class="stat-number" id="totalAds">0</div>
+                        <p>Analyzed advertisements</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center h-100">
+                    <div class="card-header">Games</div>
+                    <div class="card-body">
+                        <i class="fas fa-gamepad icon-large"></i>
+                        <div class="stat-number" id="totalGames">0</div>
+                        <p>Tracked games</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center h-100">
+                    <div class="card-header">YouTube Ads</div>
+                    <div class="card-body">
+                        <i class="fab fa-youtube icon-large"></i>
+                        <div class="stat-number" id="youtubeAds">0</div>
+                        <p>From YouTube</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center h-100">
+                    <div class="card-header">Facebook Ads</div>
+                    <div class="card-body">
+                        <i class="fab fa-facebook icon-large"></i>
+                        <div class="stat-number" id="facebookAds">0</div>
+                        <p>From Facebook</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Ads -->
+        <h2 class="mt-5 mb-4">Recent Advertisements</h2>
+        <div class="row" id="recentAds">
+            <div class="text-center py-5">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p class="mt-3">Loading recent ads...</p>
+            </div>
+        </div>
+
+        <!-- Color Trends -->
+        <h2 class="mt-5 mb-4">Color Trends</h2>
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <canvas id="colorChart" height="300"></canvas>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Top Colors in Game Ads</h5>
+                        <div id="colorLegend" class="mt-4"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Links -->
+        <h2 class="mt-5 mb-4">Quick Analysis</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Ad Audience</h5>
+                        <p class="card-text">View which audience segments are being targeted by game ads.</p>
+                        <a href="trends.html#audience" class="btn btn-primary">Audience Analysis</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Call-to-Action Trends</h5>
+                        <p class="card-text">See which CTAs are most effective in game advertisements.</p>
+                        <a href="trends.html#cta" class="btn btn-primary">CTA Analysis</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Top Games</h5>
+                        <p class="card-text">Explore the trending games and their advertising strategies.</p>
+                        <a href="top-games.html" class="btn btn-primary">View Top Games</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Game Ad Analyzer</h5>
+                    <p>An AI-powered tool for analyzing mobile game advertisements.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>Updated automatically via GitHub Actions</p>
+                    <p class="mb-0">Data refreshes daily</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Load data from JSON files
+        async function loadData() {
+            try {
+                // Update info
+                const updateInfoResponse = await fetch('data/update_info.json');
+                if (updateInfoResponse.ok) {
+                    const updateInfo = await updateInfoResponse.json();
+                    document.getElementById('lastUpdate').textContent = updateInfo.last_updated;
+                }
+
+                // All ads
+                const allAdsResponse = await fetch('data/all_ads.json');
+                if (allAdsResponse.ok) {
+                    const allAds = await allAdsResponse.json();
+                    
+                    // Update stats
+                    document.getElementById('totalAds').textContent = allAds.length;
+                    
+                    // Count unique games
+                    const uniqueGames = [...new Set(allAds.map(ad => ad.game))];
+                    document.getElementById('totalGames').textContent = uniqueGames.length;
+                    
+                    // Count by source
+                    const youtubeAds = allAds.filter(ad => ad.source === 'youtube').length;
+                    const facebookAds = allAds.filter(ad => ad.source === 'facebook').length;
+                    document.getElementById('youtubeAds').textContent = youtubeAds;
+                    document.getElementById('facebookAds').textContent = facebookAds;
+                    
+                    // Display recent ads
+                    displayRecentAds(allAds.slice(0, 6));
+                }
+
+                // Trend analysis
+                const trendResponse = await fetch('data/trend_analysis.json');
+                if (trendResponse.ok) {
+                    const trends = await trendResponse.json();
+                    displayColorTrends(trends.color_trends);
+                }
+            } catch (error) {
+                console.error('Error loading data:', error);
+            }
+        }
+
+        // Display recent ads
+        function displayRecentAds(ads) {
+            const container = document.getElementById('recentAds');
+            container.innerHTML = '';
+            
+            if (ads.length === 0) {
+                container.innerHTML = '<div class="col-12 text-center py-5"><p>No ads found. Run the collection workflow to gather data.</p></div>';
+                return;
+            }
+            
+            ads.forEach(ad => {
+                const adCard = document.createElement('div');
+                adCard.className = 'col-md-4 mb-4';
+                adCard.innerHTML = `
+                    <div class="card h-100">
+                        <img src="${ad.thumbnail_url || 'https://via.placeholder.com/300x200?text=No+Image'}" class="card-img-top" alt="${ad.title}">
+                        <div class="card-body">
+                            <h5 class="card-title">${ad.title}</h5>
+                            <p class="card-text">Game: ${ad.game}</p>
+                            <p class="card-text"><small class="text-muted">Source: ${ad.source}</small></p>
+                            <a href="${ad.video_url}" target="_blank" class="btn btn-sm btn-primary">View Ad</a>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(adCard);
+            });
+        }
+
+        // Display color trends chart
+        function displayColorTrends(colorTrends) {
+            if (!colorTrends || colorTrends.length === 0) return;
+            
+            const colors = colorTrends.map(c => c.name);
+            const counts = colorTrends.map(c => c.count);
+            
+            // Generate hex colors for chart
+            const hexColors = colors.map(color => {
+                switch(color) {
+                    case 'red': return '#FF6384';
+                    case 'blue': return '#36A2EB';
+                    case 'green': return '#4BC0C0';
+                    case 'yellow': return '#FFCE56';
+                    case 'purple': return '#9966FF';
+                    case 'orange': return '#FF9F40';
+                    case 'pink': return '#FF6384';
+                    case 'cyan': return '#4BC0C0';
+                    case 'magenta': return '#C9509E';
+                    case 'black': return '#1C1C1C';
+                    case 'white': return '#EFEFEF';
+                    case 'gray': return '#9E9E9E';
+                    case 'brown': return '#A5682A';
+                    default: return '#' + Math.floor(Math.random()*16777215).toString(16);
+                }
+            });
+            
+            // Create chart
+            const ctx = document.getElementById('colorChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: colors,
+                    datasets: [{
+                        data: counts,
+                        backgroundColor: hexColors,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+            
+            // Create color legend
+            const legend = document.getElementById('colorLegend');
+            legend.innerHTML = '';
+            
+            colorTrends.forEach((color, index) => {
+                const item = document.createElement('div');
+                item.className = 'd-flex align-items-center mb-2';
+                item.innerHTML = `
+                    <div style="width: 20px; height: 20px; background-color: ${hexColors[index]}; margin-right: 10px;"></div>
+                    <div>${color.name} (${color.count})</div>
+                `;
+                legend.appendChild(item);
+            });
+        }
+
+        // Load data when page loads
+        document.addEventListener('DOMContentLoaded', loadData);
+    </script>
+</body>
+</html>
