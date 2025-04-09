@@ -1,0 +1,95 @@
+[
+  {
+    "id": "sample1",
+    "title": "Candy Crush Saga - Sweet Match 3 Puzzle Game",
+    "game": "Candy Crush Saga",
+    "source": "youtube",
+    "thumbnail_url": "https://i.ytimg.com/vi/HFQPbBOrLgA/hqdefault.jpg",
+    "video_url": "https://www.youtube.com/watch?v=HFQPbBOrLgA",
+    "found_date": "2023-04-08",
+    "analyzed": true,
+    "analysis": {
+      "dominant_colors": [
+        {"hex": "#FF69B4", "name": "pink", "percentage": 35.2},
+        {"hex": "#FFD700", "name": "yellow", "percentage": 25.5},
+        {"hex": "#87CEEB", "name": "blue", "percentage": 15.3}
+      ],
+      "cta_type": "play",
+      "likely_audience": "casual gamers",
+      "uses_superlatives": true,
+      "mentions_free": true,
+      "mentions_new": false
+    },
+    "analysis_date": "2023-04-08"
+  },
+  {
+    "id": "sample2",
+    "title": "Rise of Kingdoms - Epic Strategy Game",
+    "game": "Rise of Kingdoms",
+    "source": "facebook",
+    "thumbnail_url": "https://via.placeholder.com/300x200/6610f2/ffffff?text=Rise+of+Kingdoms",
+    "video_url": "https://www.facebook.com/watch/?v=123456789",
+    "found_date": "2023-04-07",
+    "analyzed": true,
+    "analysis": {
+      "dominant_colors": [
+        {"hex": "#CD5C5C", "name": "red", "percentage": 40.5},
+        {"hex": "#FFD700", "name": "yellow", "percentage": 20.2},
+        {"hex": "#191970", "name": "blue", "percentage": 18.7}
+      ],
+      "cta_type": "download",
+      "likely_audience": "competitive gamers",
+      "uses_superlatives": true,
+      "mentions_free": false,
+      "mentions_new": true
+    },
+    "analysis_date": "2023-04-07"
+  },
+  {
+    "id": "sample3",
+    "title": "Coin Master - Free Spins Daily",
+    "game": "Coin Master",
+    "source": "youtube",
+    "thumbnail_url": "https://via.placeholder.com/300x200/36a2eb/ffffff?text=Coin+Master",
+    "video_url": "https://www.youtube.com/watch?v=sample3",
+    "found_date": "2023-04-06",
+    "analyzed": true,
+    "analysis": {
+      "dominant_colors": [
+        {"hex": "#36A2EB", "name": "blue", "percentage": 45.8},
+        {"hex": "#FFD700", "name": "yellow", "percentage": 30.1},
+        {"hex": "#32CD32", "name": "green", "percentage": 10.2}
+      ],
+      "cta_type": "play",
+      "likely_audience": "casual gamers",
+      "uses_superlatives": false,
+      "mentions_free": true,
+      "mentions_new": false
+    },
+    "analysis_date": "2023-04-06"
+  }
+]
+Bước 4: Tạo file trend_analysis.json
+Copy{
+  "color_trends": [
+    {"name": "blue", "count": 12},
+    {"name": "red", "count": 8},
+    {"name": "yellow", "count": 7},
+    {"name": "green", "count": 5},
+    {"name": "purple", "count": 3}
+  ],
+  "cta_trends": [
+    {"type": "play", "count": 15},
+    {"type": "download", "count": 10},
+    {"type": "get", "count": 5},
+    {"type": "install", "count": 3},
+    {"type": "unknown", "count": 2}
+  ],
+  "audience_trends": [
+    {"audience": "casual gamers", "count": 18},
+    {"audience": "competitive gamers", "count": 12},
+    {"audience": "simulation fans", "count": 5},
+    {"audience": "general gamers", "count": 3}
+  ],
+  "update_date": "2023-04-09"
+}
